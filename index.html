@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson12</title>
+    <script src="Libraries/angular.js"></script>
+    <script src="js/les12.js"></script>
+    <style>
+        .textWeight{
+            font-weight: bold;
+        }
+        .alignment{
+            text-align: center;
+        }
+        .size{
+            font-size:24px;
+            margin-bottom: 20px;
+        }
+        .active{
+          background-color: red;
+        }
+        form[name=myForm]>input.ng-valid{
+            background-color: #5cb85c;
+        }
+        form[name=myForm]>input.ng-invalid{
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+<h3 style="text-decoration: underline"><b>Tasks 1,2</b></h3>
+<div ng-controller="forStyleCtrl">
+    <button ng-click="applyObj()">apply style from obj</button>
+    <button ng-click="applyArr()">apply style from arr</button>
+    <!--В ng-class должно передаваться имя класса, а у нас объект стилей, поэтому использовал ng-style-->
+    <div id="receiveStyle" ng-style="styleObj" ng-class="classArr">test div</div>
+    <button ng-click="changeBack()" ng-class="className">change background</button>
+</div>
+<h3 style="text-decoration: underline"><b>Task 3</b></h3>
+<div ng-controller="forDisCtrl">
+    <input type="text" name="firstInput" ng-disabled="dis" style="margin-bottom: 20px"><br>
+    <input type="text" name="secondInput" ng-disabled="dis" style="margin-bottom: 20px"><br>
+    <input type="checkbox" name="option1" ng-disabled="dis">
+    <input type="checkbox" name="option2" ng-disabled="dis"><br>
+    <button ng-click="dis=true">set "disabled"</button>
+</div>
+<h3 style="text-decoration: underline"><b>Task 4</b></h3>
+<div ng-controller="forValidCtrl">
+    <form name="myForm" novalidate>
+        <input type="text" name="userName" ng-model="newUser.name" ng-minlength="4" required style="margin-bottom: 20px"><br>
+        <input type="email" name="userMail" ng-model="newUser.email" ng-minlength="4" required style="margin-bottom: 20px"><br>
+        <input type="checkbox" name="confirm" ng-model="confirmed" required><br>
+        <button type="submit" ng-disabled="myForm.$invalid">Send</button><br>
+    </form>
+</div>
+<h3 style="text-decoration: underline"><b>Task 5</b></h3>
+<div ng-controller="tabCtrl">
+    <table class="table" border="1px solid">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>City</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="item in list">
+            <td>{{item.name | lowercase}}</td>
+            <td>{{birthD(item.birthday)|date:"dd MMM yyyy"}}</td>
+            <td>{{item.city}}</td>
+        </tr>
+    </table>
+</div>
+<h3 style="text-decoration: underline"><b>Task 7</b></h3>
+<div ng-controller="sendCtrl">
+    <form name="myForm" novalidate>
+        <label>text for sending</label><br>
+        <input type="text" ng-model="sendText" required>
+        <button type="submit" ng-disabled="myForm.$invalid" ng-click="sender()">Send</button>
+    </form>
+</div>
+<div ng-controller="recCtrl">
+    <p>receiver 1</p>
+    <p>{{sendInfo}}</p>
+</div>
+<div ng-controller="recCtrl">
+    <p>receiver 2</p>
+    <p>{{sendInfo}}</p>
+</div>
+<h3 style="text-decoration: underline"><b>Task 8</b></h3>
+<div ng-controller="dateCtrl">
+    <div date-time="date"></div>
+</div>
+</body>
+</html>
